@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>Simple Browser Tests</title>
+	<script src="lib/jquery-3.1.1.min.js"></script>
+	<script src="lib/html.js"></script>
+	<script src="lib/sandbox.js"></script>
+	<script>
+		Sandbox.loadTests([
+			'tests/t1.js',
+			'tests/t2.js'
+		]);
+	</script>
+</head>
+<body>
+	<h1>Simple Browser Tests</h1>
+	<div id="pnlMain"></div>
+</body>
+</html>

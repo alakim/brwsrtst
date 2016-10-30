@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<link rel="stylesheet" href="../lib/test.css"/>
+<script src="../lib/jquery-3.1.1.min.js"></script>
+<script src="../lib/html.js"></script>
+<script>
+'use strict';
+$(function(){
+	var errors = [];
+
+	var arr = [1, 2, 3, 4, 5];
+
+	var x = 0;
+	arr.forEach(function(el, idx, thisArray){ x+=el; });
+	if(x!=15) errors.push('Error 1');
+
+	x = arr.filter(x=>x<3);
+	if(x.length!=2 && x[0]!=1 && x[1]!=2) errors.push('Error 2');
+
+	x = arr.map(x=>x+1);
+	if(x.length!=5 && x.join()!='2,3,4,5,6') errors.push('Error 3');
+
+	if(!arr.every(x=>x<10)) errors.push('Error 4');
+	if(!arr.some(x=>x>4)) errors.push('Error 5');
+
+	if(arr.reduce((sum,x)=>sum+x, 0)!=15) errors.push('Error 6');
+	if(arr.reduceRight((sum,x)=>sum+x, 0)!=15) errors.push('Error 7');
+
+
+	////////////////////////////////////////////////////////////////////
+	if(errors.length){
+		$('body').addClass('error');
+		$('body').append(Html.div(
+			Html.apply(errors, function(msg){
+				return Html.p(msg);
+			})
+		));
+	}
+	else
+		$('body').addClass('success');
+});
+</script>
+</head>
+<body>
+	<p>Массивы</p>
+</body>
+</html>
+

@@ -17,7 +17,11 @@ $(function(){
 
 	var apples = 2, oranges = 3;
 	if(`${apples}+${oranges}=${apples + oranges}`!='2+3=5') errors.push('Error 2');
-	
+
+	if('abcdefg'.includes('def')!=true || 'abcdefg'.includes('x')!=false) errors.push('Error 3');
+	if('abc'.startsWith('ab')!=true || 'abc'.startsWith('x')!=false) errors.push('Error 4');
+	if('abc'.endsWith('bc')!=true || 'abc'.endsWith('x')!=false) errors.push('Error 5');
+	if('abc'.repeat(3)!='abcabcabc') errors.push('Error 6');
 	
 	if(errors.length){
 		$('body').addClass('error');

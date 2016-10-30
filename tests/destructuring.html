@@ -7,22 +7,50 @@
 <script src="../lib/html.js"></script>
 <script>
 $(function(){
-	var errorsDetected = false;
-	var errorsMessages = [];
+	var errorMessages = [];
 
 	let [firstName, lastName] = 'Илья Кантор'.split(' ');
 	
 	if(!(firstName=='Илья' && lastName=='Кантор')){
-		errorsDetected = true;
-		errorsMessages.push('Error 1');
+		errorMessages.push('Error 1');
 	}
 
+	let [n1, n2, ...rest] = 'Юлий Цезарь Император Рима'.split(' ');
+	if(!(
+		n1=='Юлий' &&
+		n2=='Цезарь' &&
+		rest[0]=='Император' &&
+		rest[1]=='Рима'
+	)){
+		errorMessages.push('Error 2');
+	}
+
+	let [x='a', y='b'] = [];
+	if(!(x=='a' && y=='b')){
+		errorMessages.push('Error 3');
+	}
+
+	let {x2, y:y2, z2=1} = {x2:22, y:11};
+	if(!(x2==22 && y2==11 && z2==1))
+		errorMessages.push('Error 4');
+
+	let options = {
+		size:{w:100, h:50},
+		colors:['#f00', '#0a0'],
+		baseUrl:'http://yandex.ru'
+	};
+	let {baseUrl:base, size:{w:width, h:height}, colors:[errorClr, successClr]} = options;
+	if(!(
+		base=='http://yandex.ru' &&
+		width==100 && height==50 &&
+		errorClr=='#f00' && successClr=='#0a0'
+	)){errorMessages.push('Error 5');}
 
 
-	if(errorsDetected){
+	if(errorMessages.length){
 		$('body').addClass('error');
 		$('body').append(Html.div(
-			Html.apply(errorsMessages, function(msg){
+			Html.apply(errorMessages, function(msg){
 				return Html.p(msg);
 			})
 		));

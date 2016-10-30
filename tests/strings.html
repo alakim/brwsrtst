@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<link rel="stylesheet" href="../lib/test.css"/>
+<script src="../lib/jquery-3.1.1.min.js"></script>
+<script src="../lib/html.js"></script>
+<script>
+'use strict';
+$(function(){
+	var errors = [];
+
+	let s1 = `пример текста
+		многострочного`;
+
+	if(!s1.match(/пример\s+текста\s+многострочного/)) errors.push('Error 1');
+
+	var apples = 2, oranges = 3;
+	if(`${apples}+${oranges}=${apples + oranges}`!='2+3=5') errors.push('Error 2');
+	
+	
+	if(errors.length){
+		$('body').addClass('error');
+		$('body').append(Html.div(
+			Html.apply(errors, function(msg){
+				return Html.p(msg);
+			})
+		));
+	}
+	else
+		$('body').addClass('success');
+});
+</script>
+</head>
+<body>
+	<p>Строки</p>
+</body>
+</html>
+

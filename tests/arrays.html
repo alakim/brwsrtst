@@ -28,6 +28,12 @@ $(function(){
 	if(arr.reduce((sum,x)=>sum+x, 0)!=15) errors.push('Error 6');
 	if(arr.reduceRight((sum,x)=>sum+x, 0)!=15) errors.push('Error 7');
 
+	var obj = {x:2, y:3, z:4};
+	if(Object.keys(obj).join(',')!='x,y,z') errors.push('Error 8');
+
+	if(arr.indexOf(3)!=2) errors.push('Error 9');
+	if(arr.lastIndexOf(4)!=3) errors.push('Error 10');
+
 
 	////////////////////////////////////////////////////////////////////
 	if(errors.length){

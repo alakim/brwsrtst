@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<link rel="stylesheet" href="../lib/test.css"/>
+<script src="../lib/jquery-3.1.1.min.js"></script>
+<script src="../lib/html.js"></script>
+<script>
+'use strict';
+$(function(){
+	var errors = [];
+
+	if(Number('3.14')!=3.14) errors.push('Error 1');
+	
+	if(0.1234.toFixed(2)!='0.12') errors.push('Error 2');
+	
+	if(parseInt('11', 8)!=9) errors.push('Error 3.1');
+	if(parseInt('010', 10)!=10) errors.push('Error 3.2');
+	if(parseInt('010xx', 10)!=10) errors.push('Error 3.3');
+	
+	if(parseFloat('3.14')!=3.14) errors.push('Error 4');
+	
+	if(25.22.toPrecision(3)!='25.2') errors.push('Error 5.1');
+	if(.6.toPrecision(3)!='0.600') errors.push('Error 5.2');
+
+
+	////////////////////////////////////////////////////////////////////
+	if(errors.length){
+		$('body').addClass('error');
+		$('body').append(Html.div(
+			Html.apply(errors, function(msg){
+				return Html.p(msg);
+			})
+		));
+	}
+	else
+		$('body').addClass('success');
+});
+</script>
+</head>
+<body>
+	<p>Работа с числами</p>
+</body>
+</html>
+

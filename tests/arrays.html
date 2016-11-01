@@ -16,17 +16,17 @@ $(function(){
 	arr.forEach(function(el, idx, thisArray){ x+=el; });
 	if(x!=15) errors.push('Error 1');
 
-	x = arr.filter(x=>x<3);
+	x = arr.filter(function(x){return x<3;});
 	if(x.length!=2 && x[0]!=1 && x[1]!=2) errors.push('Error 2');
 
-	x = arr.map(x=>x+1);
+	x = arr.map(function(x){return x+1;});
 	if(x.length!=5 && x.join()!='2,3,4,5,6') errors.push('Error 3');
 
-	if(!arr.every(x=>x<10)) errors.push('Error 4');
-	if(!arr.some(x=>x>4)) errors.push('Error 5');
+	if(!arr.every(function(x){return x<10;})) errors.push('Error 4');
+	if(!arr.some(function(x){return x>4;})) errors.push('Error 5');
 
-	if(arr.reduce((sum,x)=>sum+x, 0)!=15) errors.push('Error 6');
-	if(arr.reduceRight((sum,x)=>sum+x, 0)!=15) errors.push('Error 7');
+	if(arr.reduce(function(sum,x){return sum+x;}, 0)!=15) errors.push('Error 6');
+	if(arr.reduceRight(function(sum,x){return sum+x;}, 0)!=15) errors.push('Error 7');
 
 	var obj = {x:2, y:3, z:4};
 	if(Object.keys(obj).join(',')!='x,y,z') errors.push('Error 8');

@@ -35,6 +35,10 @@ $(function(){
 	if(arr.lastIndexOf(4)!=3) errors.push('Error 10');
 
 
+	if([1,2,3].includes(3)==false) errors.push('Error 11.1');
+	if([1,2,3].includes(5)==true) errors.push('Error 11.2');
+	
+	
 	////////////////////////////////////////////////////////////////////
 	if(errors.length){
 		$('body').addClass('error');

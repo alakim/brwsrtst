@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<link rel="stylesheet" href="../lib/test.css"/>
+<script src="../lib/jquery-3.1.1.min.js"></script>
+<script src="../lib/html.js"></script>
+<script>
+'use strict';
+$(function(){
+	var errors = [];
+
+////////////////////////////////////////////////////////////////////////////
+
+class Car{
+	constructor(regNumber){
+		this.regNumber = regNumber;
+		this.log = [];
+	}
+	get passport(){
+		return `#${this.regNumber}`;
+	}
+}
+
+var c1 = new Car('1234');
+if(c1.passport!='#1234') errors.push('Error 1');
+c1.regNumber = 22;
+if(c1.passport!='#22') errors.push('Error 2');
+
+class Lada extends Car{
+	get producer(){return 'VAZ';}	
+}
+
+var c2 = new Lada();
+if(c2.producer!='VAZ') errors.push('Error 3');
+if(c1.producer!=null) error.push('Error 4');
+
+if(!(c1 instanceof Car)) errors.push('Error 5.1');
+if(c1 instanceof Lada) errors.push('Error 5.2');
+if(!(c2 instanceof Car)) errors.push('Error 5.3');
+if(!(c2 instanceof Lada)) errors.push('Error 5.4');
+
+
+
+////////////////////////////////////////////////////////////////////////////
+
+	if(errors.length){
+		$('body').addClass('error');
+		$('body').append(Html.div(
+			Html.apply(errors, function(msg){
+				return Html.p(msg);
+			})
+		));
+	}
+	else
+		$('body').addClass('success');
+});
+</script>
+</head>
+<body>
+	<p>Классы</p>
+</body>
+</html>
+

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<link rel="stylesheet" href="../lib/test.css"/>
+<script src="../lib/jquery-3.1.1.min.js"></script>
+<script src="../lib/html.js"></script>
+<script>
+'use strict';
+$(function(){
+	var errors = [];
+
+////////////////////////////////////////////////////////////////////////////
+
+	let name = 'Вася', surname = 'Петров';
+	let user = {
+		name, surname,
+		age: 18,
+		get fullName(){
+			return `${this.name} ${this.surname}`;
+		},
+		set names(str){
+			[this.name, this.surname] = str.split(' ');
+		},
+		get state(){
+			return `${this.name} ${this.surname}: ${this.age}`;
+		},
+		addAges(n){
+			this.age+=n;
+		}
+	};
+	if(user.fullName!='Вася Петров') errors.push('Error 1');
+	try{
+		user.fullName = 'Степа Иванов';
+		errors.push('Error 2');
+	}
+	catch(e){}
+
+	user.names = 'Федя Миронов';
+	if(user.fullName!='Федя Миронов') errors.push('Error 3.1');
+	if(user.name!='Федя' || user.surname!='Миронов') errors.push('Error 3.2');
+
+	user.addAges(3);
+	if(user.state!='Федя Миронов: 21') errors.push('Error 4');
+
+	Object.assign(user, {isAdmin:false, isEditor:true}, {isAdmin:true});
+	if(!(user.isAdmin && user.isEditor)) errors.push('Error 5');
+
+////////////////////////////////////////////////////////////////////////////
+
+	if(errors.length){
+		$('body').addClass('error');
+		$('body').append(Html.div(
+			Html.apply(errors, function(msg){
+				return Html.p(msg);
+			})
+		));
+	}
+	else
+		$('body').addClass('success');
+});
+</script>
+</head>
+<body>
+	<p>Объекты</p>
+</body>
+</html>
+

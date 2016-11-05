@@ -11,35 +11,9 @@ $(function(){
 	var errorMessages = [];
 ///////////////////////////////////////////////////////////////////////////////////
 
-	function f1(x, y=10){
-		return x+y;
-	}
+	function f3(){} 
+	if(f3.name!='f3') errorMessages.push('Error 1');
 
-	if(f1(2, 5)!=7 && f1(2)!=12)
-		errorMessages.push('Error 1');
-
-
-	function f2(x, y, ...r){
-		return {x:x, y:y, r:r};
-	}
-	var xx = f2(1, 2, 3, 4, 5);
-	if(
-		xx.x!=1 ||
-		xx.y!=2 ||
-		xx.r[0]!=3 ||
-		xx.r[1]!=4 ||
-		xx.r[2]!=5
-	) errorMessages.push('Error 2');
-
-	var options = {w:100, h:20, clr:'#f00'};
-	function f3({w, h, clr}){
-		return w==100 && h==20 && clr=='#f00';
-	}
-	if(!f3(options)) errorMessages.push('Error 3');
-
-
-	function f4(n, ff){return ff(n);}
-	if(f4(2, x=>x*x)!=4) errorMessages.push('Error 4');
 	
 ///////////////////////////////////////////////////////////////////////////////////
 
@@ -57,7 +31,7 @@ $(function(){
 </script>
 </head>
 <body>
-	<p>Функции - новый синтаксис</p>
+	<p>Функции - name</p>
 </body>
 </html>
 

@@ -2,7 +2,7 @@ body{
 	background:#f00;
 	font-family:Verdana, Arial, Sans-Serif;
 	font-size:12px;
-	margin:0;
+	margin:2px;
 	padding:0;
 }
 body.error{

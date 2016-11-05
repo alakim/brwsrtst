@@ -10,9 +10,11 @@
 $(function(){
 	var errors = [];
 
-	if(Number('3.14')!=3.14) errors.push('Error 1');
+////////////////////////////////////////////////////////////////////
+
+	if(typeof(Number)=='undefined' || Number('3.14')!=3.14) errors.push('Error 1');
 	
-	if(0.1234.toFixed(2)!='0.12') errors.push('Error 2');
+	if(!(2).toFixed || 0.1234.toFixed(2)!='0.12') errors.push('Error 2');
 	
 	if(parseInt('11', 8)!=9) errors.push('Error 3.1');
 	if(parseInt('010', 10)!=10) errors.push('Error 3.2');
@@ -20,11 +22,11 @@ $(function(){
 	
 	if(parseFloat('3.14')!=3.14) errors.push('Error 4');
 	
-	if(25.22.toPrecision(3)!='25.2') errors.push('Error 5.1');
-	if(.6.toPrecision(3)!='0.600') errors.push('Error 5.2');
+	if(!(2).toPrecision || 25.22.toPrecision(3)!='25.2') errors.push('Error 5.1');
+	if(!(2).toPrecision || .6.toPrecision(3)!='0.600') errors.push('Error 5.2');
 
 
-	////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
 	if(errors.length){
 		$('body').addClass('error');
 		$('body').append(Html.div(

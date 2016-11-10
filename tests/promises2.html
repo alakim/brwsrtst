@@ -77,25 +77,24 @@ $(function(){
 	shop.getPricelist().then(												// получаем прайс-лист
 		priceList=>priceList.clarinets.find(cl=>cl.name=='Selmer CL301')	// выбираем товар
 	)
-	.then(clarinet=>{														// асинхронные вычисления в виде цепочки промисов
-		Promise.all([														// исходные данные - простые значения и промисы - ВСЕ В КУЧУ!
-			clarinet.priceRuR,												// цена кларнета - это уже известное значение
-			post.getPostPriceRuR(clarinet.weight),							// цена доставки - получаем от сервиса в виде промиса
-			usd2Rur,														// курс валюты - промис, полученный заранее
-			myBalance														// баланс банковского счета - тоже полученный заранее промис
-		])
-		.then(([price, postPrice, usd2Rur, myBalance])=>{					// когда все промисы благополучно разрешились
-			console.log(`price: ${price} руб, post price: ${postPrice} руб, USD/RUR: ${usd2Rur}, my balance: ${myBalance} руб`);
-			var sumRuR = price + postPrice;
-			if(sumRuR>myBalance) alert('No money - no clarinet!');
-			var sumUsd = (sumRuR/usd2Rur).toFixed(2);
-			console.log(`Total price: $${sumUsd}, balance left: ${myBalance-sumRuR} руб`);
-			if(sumUsd!=490.58){
-				errors.push('Error 1');
-			}
-			
-			showErrors();
-		});
+	// асинхронные вычисления в виде цепочки промисов
+	.then(clarinet=>Promise.all([											// исходные данные - простые значения и промисы - ВСЕ В КУЧУ!
+		clarinet.priceRuR,													// цена кларнета - это уже известное значение
+		post.getPostPriceRuR(clarinet.weight),								// цена доставки - получаем от сервиса в виде промиса
+		usd2Rur,															// курс валюты - промис, полученный заранее
+		myBalance															// баланс банковского счета - тоже полученный заранее промис
+	]))
+	.then(([price, postPrice, usd2Rur, myBalance])=>{						// когда все промисы благополучно разрешились
+		console.log(`price: ${price} руб, post price: ${postPrice} руб, USD/RUR: ${usd2Rur}, my balance: ${myBalance} руб`);
+		var sumRuR = price + postPrice;
+		if(sumRuR>myBalance) alert('No money - no clarinet!');
+		var sumUsd = (sumRuR/usd2Rur).toFixed(2);
+		console.log(`Total price: $${sumUsd}, balance left: ${myBalance-sumRuR} руб`);
+		if(sumUsd!=490.58){
+			errors.push('Error 1');
+		}
+		
+		showErrors();
 	});
 	
 	

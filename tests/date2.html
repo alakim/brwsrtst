@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<link rel="stylesheet" href="../lib/test.css"/>
+<script src="../lib/jquery-3.1.1.min.js"></script>
+<script src="../lib/html.js"></script>
+<script>
+'use strict';
+$(function(){
+	var errors = [];
+
+////////////////////////////////////////////////////////////////////////////
+	
+	var date = new Date(2014, 11, 31, 12, 30, 0);
+
+	var options = {
+	  era: 'long',
+	  year: 'numeric',
+	  month: 'long',
+	  day: 'numeric',
+	  weekday: 'long',
+	  timezone: 'UTC',
+	  hour: 'numeric',
+	  minute: 'numeric',
+	  second: 'numeric'
+	};
+
+	console.log(date.toLocaleString("en-US", options));
+	if(date.toLocaleString("ru", options) != 'среда, 31 декабря 2014 г. от Рождества Христова, 12:30:00') errors.push('Error 1');
+	
+	if(date.toLocaleString("en-US", options) != 'Wednesday, December 31, 2014 Anno Domini, 12:30:00 PM') errors.push('Error 2');
+
+	
+////////////////////////////////////////////////////////////////////////////
+
+	if(errors.length){
+		$('body').addClass('error');
+		$('body').append(Html.div(
+			Html.apply(errors, function(msg){
+				return Html.p(msg);
+			})
+		));
+	}
+	else
+		$('body').addClass('success');
+});
+</script>
+</head>
+<body>
+	<p>Даты 2</p>
+</body>
+</html>
+

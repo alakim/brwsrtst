@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<link rel="stylesheet" href="../lib/test.css"/>
+<script src="../lib/jquery-3.1.1.min.js"></script>
+<script src="../lib/html.js"></script>
+<script>
+'use strict';
+$(function(){
+	var errors = [];
+
+////////////////////////////////////////////////////////////////////////////
+	
+	var date = new Date(2014, 11, 31, 12, 30, 0);
+	var expect = {ru:'31.12.2014', en:'12/31/2014'};
+	var dStr = {
+		ru: date.toLocaleDateString('ru')
+			.replace(/[^0-9\.\/]/g, ''), // заплатка для IE, вставляющего в локальную строку непечатаемые символы
+		en: date.toLocaleDateString('en-US')
+			.replace(/[^0-9\.\/]/g, '') // заплатка для IE, вставляющего в локальную строку непечатаемые символы
+	};
+	
+	if( dStr.ru!= expect.ru) errors.push('Error 1: expected "'+expect.ru+'", but was "'+dStr.ru+'"');
+	if( dStr.en!= expect.en) errors.push('Error 1: expected "'+expect.en+'", but was "'+dStr.en+'"');
+	
+
+	
+////////////////////////////////////////////////////////////////////////////
+
+	if(errors.length){
+		$('body').addClass('error');
+		$('body').append(Html.div(
+			Html.apply(errors, function(msg){
+				return Html.p(msg);
+			})
+		));
+	}
+	else
+		$('body').addClass('success');
+});
+</script>
+</head>
+<body>
+	<p>Даты 1</p>
+</body>
+</html>
+

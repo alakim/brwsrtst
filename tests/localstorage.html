@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<link rel="stylesheet" href="../lib/test.css"/>
+<script src="../lib/jquery-3.1.1.min.js"></script>
+<script src="../lib/html.js"></script>
+<script>
+'use strict';
+$(function(){
+	var errors = [];
+
+////////////////////////////////////////////////////////////////////////////
+
+	if(!localStorage) 
+		errors.push('Error 1');
+	else{
+		if(!localStorage.setItem) errors.push('Error 1.1');
+		if(!localStorage.getItem) errors.push('Error 1.2');
+	}
+
+	
+////////////////////////////////////////////////////////////////////////////
+
+	if(errors.length){
+		$('body').addClass('error');
+		$('body').append(Html.div(
+			Html.apply(errors, function(msg){
+				return Html.p(msg);
+			})
+		));
+	}
+	else
+		$('body').addClass('success');
+});
+</script>
+</head>
+<body>
+	<p>LocalStorage</p>
+</body>
+</html>
+
